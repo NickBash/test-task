@@ -2,13 +2,29 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MaterialModule} from './material/material.module';
+import {HttpClientModule} from '@angular/common/http';
+import { ContentComponent } from './components/content/content.component';
+import { DialogComponent } from './components/dialog/dialog.component';
+import { ChartComponent } from './components/chart/chart.component';
+import {NgxEchartsModule} from 'ngx-echarts';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ContentComponent,
+    DialogComponent,
+    ChartComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MaterialModule,
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]
