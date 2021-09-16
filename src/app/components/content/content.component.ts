@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {dia, shapes, ui} from '@clientio/rappid/index';
+import {dia, shapes} from '@clientio/rappid/index';
 import {DataService} from '../../services/data.service';
 import {MatDialog} from '@angular/material/dialog';
 import {DialogComponent} from '../dialog/dialog.component';
@@ -16,7 +16,6 @@ export class ContentComponent implements OnInit, AfterViewInit {
 
   private graph: dia.Graph;
   private paper: dia.Paper;
-  private scroller: ui.PaperScroller;
 
   private cells: any[] = []
 
@@ -32,7 +31,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
     const paper = this.paper = new dia.Paper({
       model: graph,
       gridSize: 5,
-      width: 600,
+      width: 1000,
       height: 800,
       drawGrid: true,
       background: {
@@ -43,13 +42,7 @@ export class ContentComponent implements OnInit, AfterViewInit {
       cellViewNamespace: shapes
     });
 
-    const scroller = this.scroller = new ui.PaperScroller({
-      paper,
-      autoResizePaper: true,
-      cursor: 'grab'
-    });
-
-    scroller.render();
+    paper.render()
 
     this.dataService.getDataElements().subscribe(data => {
       this.renderElements(data)
@@ -65,16 +58,15 @@ export class ContentComponent implements OnInit, AfterViewInit {
           width: '800px',
           data: {
             name: cellView.model.attributes.attrs.label.text,
-          }
+          },
         })
       }
     });
   }
 
   public ngAfterViewInit(): void {
-    const { scroller, paper, canvas } = this;
-    canvas.nativeElement.appendChild(this.scroller.el);
-    scroller.center();
+    const { paper, canvas } = this;
+    canvas.nativeElement.appendChild(this.paper.el);
     paper.unfreeze();
   }
 
@@ -104,17 +96,19 @@ export class ContentComponent implements OnInit, AfterViewInit {
     }
   }
 
-  renderLines(data: any): void {
-    console.log(data)
+  renderLines(data: DataLine[]): void {
     for (let item of data) {
-      if (typeof item.from === 'number') {
+      if (typeof item.to !== 'number') {
         item.to.forEach((i: number) => {
           this.templateLine(item.from, i)
         })
-      } else {
-        item.from.forEach((i: number) => {
-          this.templateLine(i, item.to)
-        })
+      }
+      if (typeof item.from !== 'number') {
+        {
+          item.from.forEach((i: number) => {
+            this.templateLine(i, item.to)
+          })
+        }
       }
     }
   }

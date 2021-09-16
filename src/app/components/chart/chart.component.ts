@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {EChartsOption} from 'echarts';
 
 @Component({
@@ -13,13 +13,29 @@ export class ChartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  randomData() {
+    const lines: any[] = []
+    while (lines.length < 7) {
+      const rand = 2000 + Math.random() * (2000 + 1);
+      lines.push(Math.floor(rand))
+    }
+    return lines
+  }
+
   chartOption: EChartsOption = {
     title: {
-      text: 'Сравнение со стандартом'
+      text: 'Сравнение с эталоном'
     },
     xAxis: {
       type: 'category',
-      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      data: [
+        'Пн',
+        'Вт',
+        'Ср',
+        'Чт',
+        'Пт',
+        'Сб',
+        'Вс'],
     },
     yAxis: {
       type: 'value',
@@ -35,11 +51,11 @@ export class ChartComponent implements OnInit {
     },
     series: [
       {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: this.randomData(),
         type: 'line',
       },
       {
-        data: [300, 2, 50, 100, 0, 30, 700],
+        data: this.randomData(),
         type: 'line',
       },
     ],
