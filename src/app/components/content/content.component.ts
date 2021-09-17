@@ -20,7 +20,6 @@ export class ContentComponent implements OnInit, AfterViewInit {
   private paper: dia.Paper;
 
   private cells: any[] = []
-  private idLinks: number = 101
   private theme: boolean = false
 
   constructor(
@@ -93,11 +92,6 @@ export class ContentComponent implements OnInit, AfterViewInit {
     });
   }
 
-  reset() {
-    this.paper.remove()
-    this.idLinks = 101
-  }
-
   public ngAfterViewInit(): void {
     this.addPaper()
   }
@@ -146,7 +140,6 @@ export class ContentComponent implements OnInit, AfterViewInit {
   templateLine(from: number, to: number, theme: boolean): void {
     if (this.cells.length > 0) {
       const link = new shapes.standard.Link({
-        id: this.idLinks,
         source: this.cells.filter(v => v.id === from)[0],
         target: this.cells.filter(v => v.id === to)[0],
         attrs: {
@@ -156,7 +149,6 @@ export class ContentComponent implements OnInit, AfterViewInit {
         }
       });
       this.graph.addCell(link)
-      this.idLinks++
     }
   }
 }
