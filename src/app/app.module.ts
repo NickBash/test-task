@@ -10,6 +10,7 @@ import { DialogComponent } from './components/dialog/dialog.component';
 import { ChartComponent } from './components/chart/chart.component';
 import {NgxEchartsModule} from 'ngx-echarts';
 import {ReactiveFormsModule} from '@angular/forms';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     ContentComponent,
     DialogComponent,
     ChartComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,

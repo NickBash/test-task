@@ -12,8 +12,8 @@ interface DataRectangle {
 }
 
 interface DataLine {
-  from: [] | number,
-  to: [] | number
+  from: number,
+  to: number
 }
 
 export {DataRectangle, DataLine}
