@@ -93,10 +93,6 @@ export class ContentComponent implements OnInit, AfterViewInit {
   }
 
   public ngAfterViewInit(): void {
-    this.addPaper()
-  }
-
-  addPaper() {
     const {paper, canvas} = this;
     if (this.paper && this.graph) {
       canvas.nativeElement.appendChild(this.paper.el);
