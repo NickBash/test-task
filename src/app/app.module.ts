@@ -9,6 +9,7 @@ import { ContentComponent } from './components/content/content.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ChartComponent } from './components/chart/chart.component';
 import {NgxEchartsModule} from 'ngx-echarts';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {NgxEchartsModule} from 'ngx-echarts';
     BrowserAnimationsModule,
     HttpClientModule,
     MaterialModule,
+    ReactiveFormsModule,
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
